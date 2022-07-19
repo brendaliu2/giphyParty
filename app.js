@@ -12,8 +12,8 @@ async function getSearchValue(e) {
   const formVal = $('#form-input').val();
   let response = await axios.get(" http://api.giphy.com/v1/gifs/search",
     { params: { q: formVal, api_key: API_KEY} });
-  const giphy = response.data.data[0].images.original.url
-  return appendGiphy(giphy)
+  const giphy = response.data.data[0].images.original.url;
+  return appendGiphy(giphy);
 }
 
 $searchButton.on('click', getSearchValue);
@@ -22,5 +22,12 @@ $searchButton.on('click', getSearchValue);
 
 
  function appendGiphy(giphy){
-    $("#new-giphy").append($(`<img src= ${giphy}>`))
+    $("#new-giphy").append($(`<img src= ${giphy}>`));
  }
+
+ function emptyGiphy(e) {
+  let $giphyContainer = $("#new-giphy");
+  $giphyContainer.empty();
+ }
+
+ $("#remove-button").on('click', emptyGiphy);
