@@ -2,17 +2,14 @@ console.log("Let's get this party started!");
 
 const $form = $('#search-giphy');
 const $searchButton = $('#search-button');
+const API_KEY = 'MhAodEJIJxQMxW9XqxKjyXfNYdLoOIym';
 
-function getFormVal(e) {
+async function getSearchValue(e) {
   e.preventDefault();
   const formVal = $('#form-input').val();
-  console.log(formVal);
-}
-
-$searchButton.on('click', getFormVal);
-
-
-async function getSearchValue() {
   let response = await axios.get(" http://api.giphy.com/v1/gifs/search",
-    { params: { p: formVal } });
+    { params: { q: formVal, api_key: API_KEY} });
+  console.log(response.data);
 }
+
+$searchButton.on('click', getSearchValue);
